@@ -20,25 +20,35 @@
     >
       <slot
         name="body"
+        class="clearfix"
         :class="[classes, item.type]"
         :item="item"
         :close="() => destroy(item)"
       >
         <!-- Default slot template -->
         <div
+          class="clearfix"
           :class="notifyClass(item)"
-          @click="destroy(item)"
+          @click="destroy(item) & dispatch('itemClick', item)"
         >
           <div
-            v-if="item.title"
-            class="notification-title"
-            v-html="item.title"
+           class="notification-image"
+           v-if="item.image"
           >
+            <img :src="item.image" alt="">
           </div>
-          <div
-            class="notification-content"
-            v-html="item.text"
-          >
+          <div class="notification-article">
+            <div
+              v-if="item.title"
+              class="notification-title"
+              v-html="item.title"
+            >
+            </div>
+            <div
+              class="notification-content"
+              v-html="item.text"
+            >
+            </div>
           </div>
         </div>
       </slot>
@@ -213,17 +223,19 @@ const Component = {
         ? event.speed
         : this.speed
 
-      let { title, text, type, data } = event
+      let { title, text, type, data, image, mark } = event
 
       const item = {
         id: Id(),
+        image,
         title,
         text,
         type,
         state: STATE.IDLE,
         speed,
         length: duration + 2 * speed,
-        data
+        data,
+        mark
       }
 
       if (duration >= 0) {
@@ -314,6 +326,9 @@ const Component = {
 
     clean () {
       this.list = this.list.filter(v => v.state !== STATE.DESTROYED)
+    },
+    dispatch (type, payload) {
+      this.$emit(type, payload)
     }
   }
 }
@@ -321,6 +336,22 @@ const Component = {
 export default Component
 </script>
 <style>
+
+.clearfix:after,
+.clearfix:before {
+  content: " ";
+  display: table;
+  line-height: 0;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
 .notifications {
   display: block;
   position: fixed;
@@ -341,9 +372,27 @@ export default Component
   background: white;
   text-align: left;
 }
+.notification-image {
+  float: left;
+}
+.notification-image img {
+  width: 100px;
+  height: 100px;
+}
+.notification-article {
+  display: table-cell;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
 
 .notification-title {
+  font-size: 14px;
   font-weight: 600;
+  word-break: break-all;
+}
+.notification-content {
+  word-break: break-all;
+  padding-top: 5px;
 }
 
 .vue-notification {

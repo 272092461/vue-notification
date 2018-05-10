@@ -16,6 +16,7 @@
     <notifications group="foo-velocity"
                    position="bottom right"
                    animation-type="velocity"
+                   @itemClick="itemCallback"
                    :speed="500" />
 
     <!-- Custom style example -->
@@ -134,6 +135,7 @@
 </template>
 
 <script>
+import image from '../assets/images/example.jpg'
 
 export default {
   name: 'app',
@@ -162,7 +164,9 @@ export default {
       `
 
       this.$notify({
+        mark: 'test',
         group,
+        image: image,
         title: `Test ${type} notification #${this.id++}`,
         text,
         type,
@@ -174,6 +178,9 @@ export default {
 
     clean (group) {
       this.$notify({ group, clean: true })
+    },
+    itemCallback (...arr) {
+      console.log(arr)
     }
   }
 }

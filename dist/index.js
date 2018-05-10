@@ -400,18 +400,22 @@ var Component = {
       var title = event.title,
           text = event.text,
           type = event.type,
-          data = event.data;
+          data = event.data,
+          image = event.image,
+          mark = event.mark;
 
 
       var item = {
         id: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__util__["b" /* Id */])(),
+        image: image,
         title: title,
         text: text,
         type: type,
         state: STATE.IDLE,
         speed: speed,
         length: duration + 2 * speed,
-        data: data
+        data: data,
+        mark: mark
       };
 
       if (duration >= 0) {
@@ -492,6 +496,9 @@ var Component = {
       this.list = this.list.filter(function (v) {
         return v.state !== STATE.DESTROYED;
       });
+    },
+    dispatch: function dispatch(type, payload) {
+      this.$emit(type, payload);
     }
   }
 };
@@ -661,7 +668,7 @@ exports = module.exports = __webpack_require__(11)();
 
 
 // module
-exports.push([module.i, ".notifications{display:block;position:fixed;z-index:5000}.notification-wrapper{display:block;overflow:hidden;width:100%;margin:0;padding:0}.notification{display:block;box-sizing:border-box;background:#fff;text-align:left}.notification-title{font-weight:600}.vue-notification{font-size:12px;padding:10px;margin:0 5px 5px;color:#fff;background:#44a4fc;border-left:5px solid #187fe7}.vue-notification.warn{background:#ffb648;border-left-color:#f48a06}.vue-notification.error{background:#e54d42;border-left-color:#b82e24}.vue-notification.success{background:#68cd86;border-left-color:#42a85f}.vn-fade-enter-active,.vn-fade-leave-active,.vn-fade-move{transition:all .5s}.vn-fade-enter,.vn-fade-leave-to{opacity:0}", ""]);
+exports.push([module.i, ".clearfix:after,.clearfix:before{content:\" \";display:table;line-height:0}.clearfix:after{clear:both}.clearfix{*zoom:1}.notifications{display:block;position:fixed;z-index:5000}.notification-wrapper{display:block;overflow:hidden;width:100%;margin:0;padding:0}.notification{display:block;box-sizing:border-box;background:#fff;text-align:left}.notification-image{float:left}.notification-image img{width:100px;height:100px}.notification-article{display:table-cell;box-sizing:border-box;padding-left:10px}.notification-title{font-size:14px;font-weight:600;word-break:break-all}.notification-content{word-break:break-all;padding-top:5px}.vue-notification{font-size:12px;padding:10px;margin:0 5px 5px;color:#fff;background:#44a4fc;border-left:5px solid #187fe7}.vue-notification.warn{background:#ffb648;border-left-color:#f48a06}.vue-notification.error{background:#e54d42;border-left-color:#b82e24}.vue-notification.success{background:#68cd86;border-left-color:#42a85f}.vn-fade-enter-active,.vn-fade-leave-active,.vn-fade-move{transition:all .5s}.vn-fade-enter,.vn-fade-leave-to{opacity:0}", ""]);
 
 // exports
 
@@ -802,12 +809,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "data-id": item.id
       }
     }, [_vm._t("body", [_c('div', {
+      staticClass: "clearfix",
       class: _vm.notifyClass(item),
       on: {
         "click": function($event) {
-          _vm.destroy(item)
+          _vm.destroy(item) & _vm.dispatch('itemClick', item)
         }
       }
+    }, [(item.image) ? _c('div', {
+      staticClass: "notification-image"
+    }, [_c('img', {
+      attrs: {
+        "src": item.image,
+        "alt": ""
+      }
+    })]) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "notification-article"
     }, [(item.title) ? _c('div', {
       staticClass: "notification-title",
       domProps: {
@@ -818,7 +835,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "innerHTML": _vm._s(item.text)
       }
-    })])], {
+    })])])], {
       item: item,
       close: function () { return _vm.destroy(item); }
     })], 2) : _vm._e()
@@ -848,7 +865,7 @@ var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(18)("2901aeae", content, true);
+var update = __webpack_require__(18)("2f1d4530", content, true);
 
 /***/ }),
 /* 18 */
