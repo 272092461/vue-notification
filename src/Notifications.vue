@@ -371,6 +371,7 @@ export default Component
   box-sizing: border-box;
   background: white;
   text-align: left;
+  cursor: pointer;
 }
 .notification-image {
   float: left;
