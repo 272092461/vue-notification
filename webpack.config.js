@@ -8,7 +8,8 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'index.js',
     library:'vue-notification',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [
@@ -35,14 +36,6 @@ module.exports = {
         }
       }
     ]
-  },
-  externals: {
-    vue: 'vue'
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
   },
   devServer: {
     historyApiFallback: true,

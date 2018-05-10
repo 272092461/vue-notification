@@ -16,7 +16,7 @@
     <notifications group="foo-velocity"
                    position="bottom right"
                    animation-type="velocity"
-                   @itemClick="itemCallback"
+                   @itemclick="itemCallback"
                    :speed="500" />
 
     <!-- Custom style example -->

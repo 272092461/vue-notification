@@ -29,7 +29,7 @@
         <div
           class="clearfix"
           :class="notifyClass(item)"
-          @click="destroy(item) & dispatch('itemClick', item)"
+          @click="destroy(item) & dispatch('itemclick', item)"
         >
           <div
            class="notification-image"

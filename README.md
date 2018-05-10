@@ -20,7 +20,7 @@ this.$notify({
 ## notification 点击回调
 
 ```html
-<notification @itemClick="callback"></notifaction>
+<notification @itemclick="callback"></notifaction>
 ```
 
 ## 为点击回调提供参数
