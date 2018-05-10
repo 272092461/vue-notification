@@ -1,5 +1,7 @@
 # vue-notification 扩展
 
+github: https://github.com/272092461/vue-notification
+
 ## vue-notification
 
 github: https://github.com/euvl/vue-notification
@@ -46,3 +48,7 @@ this.$notify({
     }
   })
 ```
+
+## 更多API
+
+github: https://github.com/euvl/vue-notification
